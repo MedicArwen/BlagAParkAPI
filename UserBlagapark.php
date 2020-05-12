@@ -8,8 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * This is a dummy entity. Remove it!
- *
  * @ApiResource
  * @ORM\Entity
  */
@@ -23,7 +21,7 @@ class UserBlagapark
      * @ORM\Column(type="integer")
      */
     private $id;
-/**
+    /**
      * @ORM\Column(type="integer")
      * @var int Mode d'authentification de l'utilisateur dans firebase (0:email, 1:fb,2:twitter,3:google)
      * @Assert\NotBlank
@@ -111,9 +109,9 @@ class UserBlagapark
     public $Favoris;
     
      /**
-     * @var ParkinPlace[] Liste des places proposées par l'utilisateur.
+     * @var ParkinPlace[] Liste des places proposées par l'utilisateur en tant que Bailleur.
      *
-     * @ORM\OneToMany(targetEntity="ParkingPlace", mappedBy="UserBlagapark", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="ParkingPlace", mappedBy="Bailleur", cascade={"persist", "remove"})
      */
     public $ParkingPlaces;
     
@@ -136,15 +134,28 @@ class UserBlagapark
      */
     public $TransactionsLocataire;
     
+     /**
+     * @var BankAccount Compte bancaire de l'utilisateur.
+     * @ORM\OneToOne(targetEntity="BankAccount", mappedBy="UserBlagapark", cascade={"persist", "remove"})
+     */
+    public $BankAccount;
+    /**
+     * @var NotificationsSetting Compte bancaire de l'utilisateur.
+     * @ORM\OneToOne(targetEntity="NotificationsSetting", mappedBy="UserBlagapark", cascade={"persist", "remove"})
+     */
+    public $NotificationsSetting;
+    
     public function __construct(int $pAuthModeFirebase,string $pUidFirebase)
     {
+        // Lien avec Firebase
+        $this->authModeFirebase = $pAuthModeFirebase;
+        $this->uidFirebase = $pUidFirebase;
+        // associations
         $this->Favoris = new ArrayCollection();
         $this->ParkingPlaces = new ArrayCollection();
         $this->ReservationsPlaces = new ArrayCollection();
         $this->TransactionsBailleur = new ArrayCollection();
         $this->TransactionsLocataire = new ArrayCollection();
-        $this->authModeFirebase = $pAuthModeFirebase;
-        $this->uidFirebase = $pUidFirebase;
     }
     
     public function getId(): int

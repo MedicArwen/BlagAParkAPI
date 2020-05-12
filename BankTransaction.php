@@ -34,7 +34,7 @@ class BankTransaction
      *  @Assert\NotBlank
      *  @var DateTime Date de la création de la transaction au format "Y-m-d H:i:s".
      */
-    public $creationDateTime;
+    public $dateTransaction;
      /* @ORM\Column(type="float")
      *  @var float Montant de la transaction?
      *  @Assert\GreaterThanOrEqual(0)
@@ -74,25 +74,27 @@ class BankTransaction
      */
       public $Bailleur;
       
-      
+    /*------------------------>  CONSTRUCTEUR(S) <----------------------------*/
         public function __construct(UserBlagapark $pLocataire, \App\Entity\UserBlagapark $pBailleur,
                 App\Entity\ReservationPlace $pReservationPlace,float $pAmmount, int $pDescriptionCode,bool $pIsPaidWithBlagaparkAccount)
     {
-        // Clé primaire composite de l'entitée
-        $this->ReservationPlace = $pReservationPlace;
-        $this->Bailleur = $pBailleur;
-        $this->Locataire = $pLocataire;
-        // Horodatage de la création
-        $this->creationDateTime = new \DateTime("now");
         // vérification de la légitimité de la transaction
         // TODO
         //Détails de la transaction
         $this->amount = $pAmmount;
         $this->descriptionCode = $pDescriptionCode;
-        $this->isPaidWithBlagaparkAccount = $pIsPaidWithBlagaparkAccount;
+        $this->isPaidWithBlagaparkAccount = $pIsPaidWithBlagaparkAccount;        
+        // Associations 
+        $this->ReservationPlace = $pReservationPlace;
+        $this->Bailleur = $pBailleur;
+        $this->Locataire = $pLocataire;
+        // Horodatage de la création
+        $this->dateTransaction = new \DateTime("now");
+       
+        
     }
       
-      
+    /*----------------------->  GETTERS ET SETTERS <--------------------------*/      
      public function getId(): ?int
     {
         return $this->id;
