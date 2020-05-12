@@ -136,14 +136,20 @@ class UserBlagapark
     
      /**
      * @var BankAccount Compte bancaire de l'utilisateur.
-     * @ORM\OneToOne(targetEntity="BankAccount", mappedBy="UserBlagapark", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="BankAccount", mappedBy="Owner", cascade={"persist", "remove"})
      */
     public $BankAccount;
     /**
-     * @var NotificationsSetting Compte bancaire de l'utilisateur.
-     * @ORM\OneToOne(targetEntity="NotificationsSetting", mappedBy="UserBlagapark", cascade={"persist", "remove"})
+     * @var NotificationsSetting  Réglage des notifications de l'utilisateur.
+     * @ORM\OneToOne(targetEntity="NotificationsSetting", mappedBy="Owner", cascade={"persist", "remove"})
      */
+
     public $NotificationsSetting;
+    /**
+     * @var BankRetrait[] Retraits sur le compte Blagapark réalisés par l'utilisateur.
+     * @ORM\OneToMany(targetEntity="BankRetrait", mappedBy="UserBlagapark", cascade={"persist", "remove"})
+     */
+    public $Retraits;
     
     public function __construct(int $pAuthModeFirebase,string $pUidFirebase)
     {

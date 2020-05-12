@@ -59,6 +59,7 @@ class BankRetrait
      /**
      * @var UserBlagapark Utilisateur qui est dans la transaction en tant que locataire.
      * @ORM\ManyToOne(targetEntity="UserBlagapark", inversedBy="Retraits")
+      * 
      * @Assert\NotBlank
      * @Assert\NotNull
      */

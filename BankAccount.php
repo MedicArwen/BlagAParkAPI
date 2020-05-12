@@ -50,17 +50,18 @@ class BankAccount
      * @Assert\NotBlank
      * @Assert\NotNull
      */
-      public $UserBlagapark;
+      public $Owner;
+      
       
     /*------------------------>  CONSTRUCTEUR(S) <----------------------------*/
-        public function __construct(UserBlagapark $pUserBlagapark)
+        public function __construct(UserBlagapark $pOwner)
     {
         // Données de base du compte bancaire
         $this->emailPayPal = "";
         $this->IBAN = "";
         $this->BIC = "";  
         // Associations 
-        $this->UserBlagapark = $pUserBlagapark;
+        $this->Owner = $pOwner;
     }
       
     /*----------------------->  GETTERS ET SETTERS <--------------------------*/      

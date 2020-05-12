@@ -59,7 +59,8 @@ class NotificationsSetting
      * @Assert\NotBlank
      * @Assert\NotNull
      */
-      public $UserBlagapark;
+      public $Owner;
+      
       
     /*------------------------>  CONSTRUCTEUR(S) <----------------------------*/
         public function __construct(UserBlagapark $pUserBlagapark)
@@ -70,7 +71,7 @@ class NotificationsSetting
         $this->notifyPrivateMessages = true;
         $this->notifyEventPlace = true;
         // ASSOCIATION(S)
-        $this->UserBlagapark = $pUserBlagapark;
+        $this->Owner = $pUserBlagapark;
     }
       
     /*----------------------->  GETTERS ET SETTERS <--------------------------*/      
